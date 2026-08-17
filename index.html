@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conteúdo Exclusivo - Scarface</title>
+
+  <!-- ADICIONE ESTAS METATAGS PARA O X ACEITAR O LINK -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
+  <meta name="twitter:description" content="Clique para assistir ao vídeo completo.">
+  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
+
   <style>
     * {
       margin: 0;
@@ -22,7 +29,6 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    /* Container que prende tudo no centro exato da tela */
     .screen-center {
       position: relative;
       width: 100%;
@@ -34,7 +40,6 @@
       background: #000000;
     }
 
-    /* Vídeo de fundo rodando em loop */
     video {
       position: absolute;
       top: 0;
@@ -45,7 +50,6 @@
       z-index: 1;
     }
 
-    /* Camada escura leve para destacar o botão sobre o vídeo */
     .overlay {
       position: absolute;
       top: 0;
@@ -56,7 +60,6 @@
       z-index: 2;
     }
 
-    /* Link principal que agrupa o botão central e o texto */
     .cta-wrapper {
       position: relative;
       z-index: 3;
@@ -73,7 +76,6 @@
       transform: scale(1.05);
     }
 
-    /* O Botão de Play Centralizado */
     .play-circle {
       width: 90px;
       height: 90px;
@@ -87,7 +89,6 @@
       border: 2px solid #ffffff;
     }
 
-    /* O Triângulo do Play */
     .play-triangle {
       width: 0;
       height: 0;
@@ -97,7 +98,6 @@
       margin-left: 5px;
     }
 
-    /* O Texto centralizado embaixo do botão */
     .cta-text {
       background: rgba(0, 0, 0, 0.8);
       color: #ffffff;
@@ -115,16 +115,13 @@
 <body>
 
   <div class="screen-center">
-    <!-- Vídeo rodando em loop e mudo no fundo -->
     <video autoplay muted loop playsinline>
       <source src="video.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
 
-    <!-- Escurecimento leve para contraste -->
     <div class="overlay"></div>
 
-    <!-- Botão Centralizado que redireciona para o Netlify -->
     <a href="https://scarfaceadamerica.netlify.app/" class="cta-wrapper">
       <div class="play-circle">
         <div class="play-triangle"></div>
