@@ -3,55 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clique para Assistir</title>
+  <title>Conteúdo Exclusivo - Scarface</title>
   <style>
-    body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    
-    .container { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-    
-    /* O vídeo fica ao fundo */
-    video { width: 100%; height: 100%; object-fit: cover; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* O botão de "Play" centralizado */
-    .play-button {
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #000000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* Container que prende tudo no centro exato da tela */
+    .screen-center {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    /* Vídeo de fundo rodando em loop */
+    video {
       position: absolute;
-      width: 100px;
-      height: 100px;
-      background: rgba(255, 255, 255, 0.2);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* Camada escura leve para destacar o botão sobre o vídeo */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+
+    /* Link principal que agrupa o botão central e o texto */
+    .cta-wrapper {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .cta-wrapper:hover {
+      transform: scale(1.05);
+    }
+
+    /* O Botão de Play Centralizado */
+    .play-circle {
+      width: 90px;
+      height: 90px;
+      background: rgba(255, 0, 85, 0.9);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      border: 2px solid white;
-      transition: transform 0.2s, background 0.2s;
-      z-index: 10;
+      box-shadow: 0 0 25px rgba(255, 0, 85, 0.7);
+      margin-bottom: 15px;
+      border: 2px solid #ffffff;
     }
 
-    .play-button:hover { transform: scale(1.1); background: rgba(255, 255, 255, 0.4); }
+    /* O Triângulo do Play */
+    .play-triangle {
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 25px solid #ffffff;
+      margin-left: 5px;
+    }
 
-    /* Triângulo do play */
-    .triangle {
-      width: 0; height: 0;
-      border-top: 20px solid transparent;
-      border-bottom: 20px solid transparent;
-      border-left: 35px solid white;
-      margin-left: 10px;
+    /* O Texto centralizado embaixo do botão */
+    .cta-text {
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- O vídeo roda no fundo, mas não responde ao clique -->
+  <div class="screen-center">
+    <!-- Vídeo rodando em loop e mudo no fundo -->
     <video autoplay muted loop playsinline>
       <source src="video.mp4" type="video/mp4">
+      Seu navegador não suporta vídeos.
     </video>
 
-    <!-- O link de redirecionamento está no botão central -->
-    <a href="https://scarfaceadamerica.netlify.app/" class="play-button">
-      <div class="triangle"></div>
+    <!-- Escurecimento leve para contraste -->
+    <div class="overlay"></div>
+
+    <!-- Botão Centralizado que redireciona para o Netlify -->
+    <a href="https://scarfaceadamerica.netlify.app/" class="cta-wrapper">
+      <div class="play-circle">
+        <div class="play-triangle"></div>
+      </div>
+      <div class="cta-text">CLIQUE PARA VER COMPLETO</div>
     </a>
   </div>
 
