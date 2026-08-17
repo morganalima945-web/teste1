@@ -3,19 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Conteúdo Exclusivo - Scarface</title>
+  <title>Vídeo Exclusivo</title>
 
-  <!-- METATAGS DO OPEN GRAPH E DO X (TWITTER) -->
+  <!-- METATAGS DO OPEN GRAPH E X (TWITTER) -->
   <meta property="og:title" content="Conteúdo Exclusivo - Scarface">
-  <meta property="og:description" content="Clique para assistir ao vídeo completo com som.">
   <meta property="og:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
-  <meta property="og:url" content="https://morganalima945-web.github.io/teste1/">
-  <meta property="og:type" content="website">
-
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
-  <meta name="twitter:description" content="Clique para assistir ao vídeo completo com som.">
-  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
 
   <style>
     * {
@@ -35,7 +28,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    .player-wrapper {
+    .player-container {
       position: relative;
       width: 100%;
       height: 100%;
@@ -45,21 +38,22 @@
       background: #000000;
     }
 
-    /* Vídeo rodando fluido e adaptado para todas as telas */
+    /* Força o vídeo a se manter estritamente dentro da página web */
     video {
       width: 100%;
       height: 100%;
       object-fit: contain;
       background: #000000;
+      outline: none;
     }
 
-    /* O botão começa invisível e surge suavemente */
+    /* Botão que aparece após 1.5 segundos para mandar para o Netlify */
     .cta-button {
       position: absolute;
-      bottom: 10%;
+      bottom: 8%;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 0.6s ease-in-out;
       z-index: 10;
     }
 
@@ -74,24 +68,19 @@
       box-shadow: 0 4px 20px rgba(255, 0, 85, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.3);
       display: inline-block;
-      transition: transform 0.2s;
-    }
-
-    .btn-link:hover {
-      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-  <div class="player-wrapper">
-    <!-- Vídeo nativo configurado para iniciar automaticamente sem som e em loop -->
-    <video id="meuVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
+  <div class="player-container">
+    <!-- Player HTML5 limpo com os atributos de reprodução estritamente interna -->
+    <video id="meuVideo" autoplay muted loop playsinline webkit-playsinline x5-playsinline preload="auto">
       <source src="video.mp4" type="video/mp4">
-      Seu navegador não suporta vídeos.
+      Seu navegador não suporta a reprodução deste vídeo.
     </video>
 
-    <!-- Botão de redirecionamento que aparece após 1.5 segundos -->
+    <!-- Botão revelado após 1.5 segundos -->
     <div id="cta" class="cta-button">
       <a href="https://scarfaceadamerica.netlify.app/" class="btn-link" target="_blank">
         ASSISTIR COMPLETO COM SOM ➔
@@ -100,17 +89,20 @@
   </div>
 
   <script>
-    // Força o play via script caso o navegador mobile exija interação prévia
-    document.addEventListener("DOMContentLoaded", function() {
-      var v = document.getElementById("meuVideo");
-      if (v) {
-        v.play().catch(function(error) {
-          console.log("Autoplay restrito, aguardando interação.");
-        });
+    // Força o início imediato da reprodução interna via script
+    window.addEventListener('DOMContentLoaded', function() {
+      var video = document.getElementById('meuVideo');
+      if (video) {
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function(error) {
+            console.log("Reprodução automática restrita pelo navegador.");
+          });
+        }
       }
     });
 
-    // Revela o botão de CTA exatamente 1.5 segundos após o carregamento
+    // Revela o botão após 1.5 segundos
     window.onload = function() {
       setTimeout(function() {
         var cta = document.getElementById('cta');
