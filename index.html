@@ -5,10 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Vídeo Exclusivo</title>
 
-  <!-- METATAGS DO OPEN GRAPH E X (TWITTER) -->
+  <!-- METATAGS DO OPEN GRAPH -->
   <meta property="og:title" content="Conteúdo Exclusivo - Scarface">
   <meta property="og:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="video.other">
+
+  <!-- METATAGS X (TWITTER) PLAYER CARD -->
+  <!-- Altera o tipo de card para player embutido -->
+  <meta name="twitter:card" content="player">
+  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
+  <meta name="twitter:description" content="Assista ao vídeo exclusivo completo.">
+  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
+  
+  <!-- IMPORTANTE: Coloque aqui o link HTTPS completo DESTA página HTML -->
+  <meta name="twitter:player" content="https://SEU-DOMINIO.com/caminho/para/este-arquivo.html">
+  <meta name="twitter:player:width" content="1280">
+  <meta name="twitter:player:height" content="720">
+  
+  <!-- IMPORTANTE: Coloque aqui o link HTTPS direto para o arquivo .mp4 -->
+  <meta name="twitter:player:stream" content="https://SEU-DOMINIO.com/caminho/para/video.mp4">
+  <meta name="twitter:player:stream:content_type" content="video/mp4">
 
   <style>
     * {
@@ -75,8 +91,9 @@
 
   <div class="player-container">
     <!-- Player HTML5 limpo com os atributos de reprodução estritamente interna -->
+    <!-- Coloque o link completo do vídeo no src também -->
     <video id="meuVideo" autoplay muted loop playsinline webkit-playsinline x5-playsinline preload="auto">
-      <source src="video.mp4" type="video/mp4">
+      <source src="https://SEU-DOMINIO.com/caminho/para/video.mp4" type="video/mp4">
       Seu navegador não suporta a reprodução deste vídeo.
     </video>
 
