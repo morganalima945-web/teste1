@@ -5,18 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conteúdo Exclusivo - Scarface</title>
 
-  <!-- METATAGS DO OPEN GRAPH (Obrigatórias para o X reconhecer o card) -->
+  <!-- METATAGS DE COMPATIBILIDADE PARA O X (Padrão de Imagem Grande) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
+  <meta name="twitter:description" content="Clique para assistir ao vídeo completo.">
+  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
+
   <meta property="og:title" content="Conteúdo Exclusivo - Scarface">
   <meta property="og:description" content="Clique para assistir ao vídeo completo.">
   <meta property="og:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
   <meta property="og:url" content="https://morganalima945-web.github.io/teste1/">
   <meta property="og:type" content="website">
-
-  <!-- METATAGS DO X (TWITTER) -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
-  <meta name="twitter:description" content="Clique para assistir ao vídeo completo.">
-  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
 
   <style>
     * {
@@ -122,16 +121,14 @@
 <body>
 
   <div class="screen-center">
-    <!-- Vídeo rodando em loop e mudo no fundo -->
-    <video autoplay muted loop playsinline>
+    <!-- Adicionados os atributos 'autoplay', 'muted', 'loop', 'playsinline' e 'preload="auto"' para forçar o início -->
+    <video autoplay muted loop playsinline preload="auto">
       <source src="video.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
 
-    <!-- Camada escura de contraste -->
     <div class="overlay"></div>
 
-    <!-- Botão centralizado que redireciona para o Netlify -->
     <a href="https://scarfaceadamerica.netlify.app/" class="cta-wrapper">
       <div class="play-circle">
         <div class="play-triangle"></div>
