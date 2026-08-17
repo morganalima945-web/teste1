@@ -35,18 +35,20 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    .screen-center {
+    /* O link ocupa a tela inteira, garantindo que qualquer toque mande para o Netlify */
+    .video-link-wrapper {
       position: relative;
       width: 100%;
       height: 100%;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #000000;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* Vídeo forçado a ocupar a tela sem abrir player nativo */
+    /* Vídeo rodando em loop e mudo (único formato que o celular roda automático sem bloquear) */
     video {
       position: absolute;
       top: 0;
@@ -55,77 +57,79 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
-      pointer-events: none; /* Impede cliques diretos no vídeo que abrem o player nativo */
     }
 
+    /* Camada translúcida para dar destaque ao botão de play central */
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.2);
       z-index: 2;
     }
 
-    /* Botão centralizado que funciona como o gatilho principal */
-    .cta-wrapper {
+    /* Botão de Play centralizado que chama muita atenção sobre o vídeo rodando */
+    .play-overlay-btn {
       position: relative;
       z-index: 3;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .cta-wrapper:hover {
-      transform: scale(1.05);
     }
 
     .play-circle {
-      width: 90px;
-      height: 90px;
+      width: 85px;
+      height: 85px;
       background: rgba(255, 0, 85, 0.9);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 25px rgba(255, 0, 85, 0.7);
+      box-shadow: 0 0 30px rgba(255, 0, 85, 0.8);
       margin-bottom: 15px;
       border: 2px solid #ffffff;
+      animation: pulse 1.5s infinite;
     }
 
     .play-triangle {
       width: 0;
       height: 0;
-      border-top: 15px solid transparent;
-      border-bottom: 15px solid transparent;
-      border-left: 25px solid #ffffff;
-      margin-left: 5px;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      border-left: 24px solid #ffffff;
+      margin-left: 4px;
     }
 
     .cta-text {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       color: #ffffff;
-      padding: 12px 24px;
+      padding: 10px 22px;
       border-radius: 30px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       letter-spacing: 0.5px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.3);
       text-align: center;
+    }
+
+    /* Animação sutil de pulsar no botão para atrair o clique */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <div class="screen-center">
-    <!-- Atributos essenciais para iOS/Android e pointer-events desativado -->
+  <!-- Tocar em qualquer lugar da tela (ou no botão) redireciona para o Netlify -->
+  <a href="https://scarfaceadamerica.netlify.app/" class="video-link-wrapper">
+    
+    <!-- Vídeo rodando automaticamente de fundo -->
     <video autoplay muted loop playsinline webkit-playsinline preload="auto">
       <source src="video.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
@@ -133,23 +137,22 @@
 
     <div class="overlay"></div>
 
-    <!-- O link que manda para o Netlify ao ser tocado -->
-    <a href="https://scarfaceadamerica.netlify.app/" class="cta-wrapper">
+    <!-- Botão centralizado pulsando sobre o vídeo em movimento -->
+    <div class="play-overlay-btn">
       <div class="play-circle">
         <div class="play-triangle"></div>
       </div>
-      <div class="cta-text">CLIQUE PARA VER COMPLETO</div>
-    </a>
-  </div>
+      <div class="cta-text">CLIQUE PARA ASSISTIR COM SOM</div>
+    </div>
+
+  </a>
 
   <script>
-    // Força o vídeo a dar play via script caso o navegador bloqueie o autoplay puro
+    // Força o play via JavaScript caso algum dispositivo tente pausar
     document.addEventListener("DOMContentLoaded", function() {
-      var video = document.querySelector("video");
-      if (video) {
-        video.play().catch(function(error) {
-          console.log("Autoplay bloqueado pelo navegador, ignorando...");
-        });
+      var v = document.querySelector("video");
+      if (v) {
+        v.play().catch(function(e) { console.log("Autoplay handled"); });
       }
     });
   </script>
