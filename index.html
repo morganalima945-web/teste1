@@ -2,20 +2,20 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Conteúdo Exclusivo - Scarface</title>
 
-  <!-- METATAGS DE COMPATIBILIDADE PARA O X (Padrão de Imagem Grande) -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
-  <meta name="twitter:description" content="Clique para assistir ao vídeo completo.">
-  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
-
+  <!-- METATAGS DO X E OPEN GRAPH -->
   <meta property="og:title" content="Conteúdo Exclusivo - Scarface">
   <meta property="og:description" content="Clique para assistir ao vídeo completo.">
   <meta property="og:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
   <meta property="og:url" content="https://morganalima945-web.github.io/teste1/">
   <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Conteúdo Exclusivo - Scarface">
+  <meta name="twitter:description" content="Clique para assistir ao vídeo completo.">
+  <meta name="twitter:image" content="https://morganalima945-web.github.io/teste1/capa-preta.jpg">
 
   <style>
     * {
@@ -46,6 +46,7 @@
       background: #000000;
     }
 
+    /* Vídeo forçado a ocupar a tela sem abrir player nativo */
     video {
       position: absolute;
       top: 0;
@@ -54,6 +55,7 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
+      pointer-events: none; /* Impede cliques diretos no vídeo que abrem o player nativo */
     }
 
     .overlay {
@@ -66,6 +68,7 @@
       z-index: 2;
     }
 
+    /* Botão centralizado que funciona como o gatilho principal */
     .cta-wrapper {
       position: relative;
       z-index: 3;
@@ -76,6 +79,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .cta-wrapper:hover {
@@ -121,14 +125,15 @@
 <body>
 
   <div class="screen-center">
-    <!-- Adicionados os atributos 'autoplay', 'muted', 'loop', 'playsinline' e 'preload="auto"' para forçar o início -->
-    <video autoplay muted loop playsinline preload="auto">
+    <!-- Atributos essenciais para iOS/Android e pointer-events desativado -->
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto">
       <source src="video.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
 
     <div class="overlay"></div>
 
+    <!-- O link que manda para o Netlify ao ser tocado -->
     <a href="https://scarfaceadamerica.netlify.app/" class="cta-wrapper">
       <div class="play-circle">
         <div class="play-triangle"></div>
@@ -136,6 +141,18 @@
       <div class="cta-text">CLIQUE PARA VER COMPLETO</div>
     </a>
   </div>
+
+  <script>
+    // Força o vídeo a dar play via script caso o navegador bloqueie o autoplay puro
+    document.addEventListener("DOMContentLoaded", function() {
+      var video = document.querySelector("video");
+      if (video) {
+        video.play().catch(function(error) {
+          console.log("Autoplay bloqueado pelo navegador, ignorando...");
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
